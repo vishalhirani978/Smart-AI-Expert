@@ -2,12 +2,21 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy requirements first
-COPY requirements.txt .
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies including gunicorn explicitly
-RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir gunicorn
+# Install Python packages directly
+RUN pip install --no-cache-dir \
+    flask \
+    groq \
+    google-generativeai \
+    cohere \
+    openai \
+    requests \
+    python-dotenv \
+    gunicorn
 
 # Copy all project files
 COPY . .
@@ -18,5 +27,5 @@ EXPOSE 7860
 # Set environment
 ENV PORT=7860
 
-# Run with full path to gunicorn
-CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:7860", "--timeout", "120", "app:app"]
+# Start app
+CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:7860", "--timeout", "120", "--workers", "1", "app:app"]
