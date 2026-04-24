@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart AI Expert</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">&#9670;</div>
+                <h1>Smart AI Expert</h1>
+            </div>
+            <div class="header-right">
+                <button id="newChatBtn" class="icon-btn" title="New chat">&#10133;</button>
+                <button id="clearBtn" class="icon-btn" title="Clear">&#128465;</button>
+                <button id="themeToggle" class="icon-btn" title="Toggle theme">
+                    <span class="theme-icon">&#9789;</span>
+                </button>
+            </div>
+        </header>
+
+        <main id="chatArea" class="chat-area">
+            <div id="welcomeScreen" class="welcome-screen">
+                <div class="welcome-logo">&#9670;</div>
+                <h2>Smart AI Expert</h2>
+                <p>Get expert answers by combining multiple AI models</p>
+                <div class="suggestions">
+                    <button class="suggestion-btn" onclick="useSuggestion(this)">
+                        <span class="suggestion-icon">&#10022;</span>
+                        <span>Write a prime number checker</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="useSuggestion(this)">
+                        <span class="suggestion-icon">&#9889;</span>
+                        <span>What is the capital of Japan?</span>
+                    </button>
+                    <button class="suggestion-btn" onclick="useSuggestion(this)">
+                        <span class="suggestion-icon">&#9998;</span>
+                        <span>Explain quantum computing</span>
+                    </button>
+                </div>
+            </div>
+            <div id="messages"></div>
+        </main>
+
+        <footer class="input-area">
+            <div class="input-container">
+                <textarea id="userInput" placeholder="Ask anything..." rows="1"></textarea>
+                <button id="sendBtn" class="send-btn">&#10140;</button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
